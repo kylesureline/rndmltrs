@@ -1,0 +1,6 @@
+form,
+button {
+  @media print {
+    display: none;
+  }
+}

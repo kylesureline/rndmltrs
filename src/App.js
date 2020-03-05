@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+import { initialState, reducer } from './reducers/reducer';
+import Form from './components/Form';
+import Table from './components/Table';
+import {
+  CLEAR_WORDS,
+} from './reducers/actions';
 
-function App() {
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const handleClear = e => {
+    dispatch(CLEAR_WORDS());
+  };
+
+  const handleGenerate = e => {
+
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Form state={state} dispatch={dispatch} />
+      {!!state.values.length && <button onClick={handleClear}>Clear</button>}
+      {!!state.values.length && <button onClick={handleGenerate}>Generate</button>}
+      <Table table={state.table} />
     </div>
   );
-}
+};
 
 export default App;
