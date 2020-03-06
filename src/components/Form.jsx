@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {
   ADD_WORD,
   CHANGE_FONTS,
-  TOGGLE_UPPERCASE
+  TOGGLE_UPPERCASE,
+  CLEAR_WORDS,
 } from '../reducers/actions';
 
 const Form = ({ state, dispatch }) => {
@@ -28,27 +29,37 @@ const Form = ({ state, dispatch }) => {
     dispatch(TOGGLE_UPPERCASE());
   };
 
+  const handleClear = e => {
+    dispatch(CLEAR_WORDS());
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={value} onChange={handleChange} />
-      {!!values.length && <p>{values.map(value => `${value} `)}</p>}
-      <fieldset>
+    <div className="form">
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={value} onChange={handleChange}/>
+      </form>
+      {!!values.length && (
+        <div>
+          <span>{values.join(', ')}<button onClick={handleClear}>Clear</button></span>
+        </div>
+      )}
+      <div>
         {['Kalam', 'Marck Script', 'Source Sans Pro', 'Playfair Display'].map((font, index) => {
           return (
-            <label key={index} className={`font-${index + 1}`}>
+            <span key={index} className={`font-${index + 1}`}>
               <input type="checkbox" checked={fonts.includes(index + 1)} onChange={() => handleFont(index + 1)} />
               {font}
-            </label>
+            </span>
           );
         })}
-      </fieldset>
-      <fieldset>
-        <label className="font-4">
+      </div>
+      <div>
+        <span>
           <input type="checkbox" checked={allowUppercase} onChange={handleUppercase} />
           Allow uppercase
-        </label>
-      </fieldset>
-    </form>
+        </span>
+      </div>
+    </div>
   );
 };
 

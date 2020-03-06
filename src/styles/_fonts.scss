@@ -16,15 +16,15 @@
   font-family: 'Playfair Display', serif;
 }
 
-fieldset {
-  padding: 0;
-  margin: 0;
-  border: none;
-  label {
+// div {
+//   padding: 0;
+//   margin: 0;
+//   border: none;
+  span {
     margin: 0 10px;
     line-height: 30px;
     input {
       margin-right: 5px;
     }
   }
-}
+// }

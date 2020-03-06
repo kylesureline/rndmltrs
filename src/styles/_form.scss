@@ -1,6 +1,11 @@
-form,
+.form,
 button {
   @media print {
     display: none;
   }
+}
+
+button,
+input[type="text"] {
+  margin: 10px;
 }

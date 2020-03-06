@@ -4,24 +4,20 @@ import Form from './components/Form';
 import Table from './components/Table';
 import {
   CLEAR_WORDS,
+  GENERATE,
 } from './reducers/actions';
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const handleClear = e => {
-    dispatch(CLEAR_WORDS());
-  };
-
   const handleGenerate = e => {
-
+    dispatch(GENERATE());
   };
 
   return (
     <div>
       <Form state={state} dispatch={dispatch} />
-      {!!state.values.length && <button onClick={handleClear}>Clear</button>}
-      {!!state.values.length && <button onClick={handleGenerate}>Generate</button>}
+      <button onClick={handleGenerate} disabled={!state.values.length}>Generate</button>
       <Table table={state.table} />
     </div>
   );

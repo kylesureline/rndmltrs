@@ -15,3 +15,7 @@ export const CHANGE_FONTS = font => ({
 export const TOGGLE_UPPERCASE = () => ({
   type: 'TOGGLE_UPPERCASE',
 });
+
+export const GENERATE = () => ({
+  type: 'GENERATE',
+});

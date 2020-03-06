@@ -1,13 +1,28 @@
+const generateTable = (fonts, values, allowUppercase) => {
+  return [...Array(10)].map((_, rowIndex) => {
+    return [...Array(10)].map((_, colIndex) => {
+      let value = values[Math.floor(Math.random() * values.length)];
+      if(allowUppercase) {
+        value = Math.random() > .5 ? `${value.slice(0, 1).toUpperCase()}${value.slice(1)}` : value;
+      }
+      const font = fonts[Math.floor(Math.random() * fonts.length)];
+      return {
+        value,
+        className: `font-${font}`
+      };
+    })
+  })
+};
+
 const values = 'abcdefghijklmnopqrstuvwxyz'.split('');
-const table = [...Array(10)].map((_, i) => ([...Array(10)].map((_, i) => ({
-  value: values[Math.floor(Math.random() * values.length)],
-  className: `font-${Math.ceil(Math.random() * 4)}`
-}))));
+const allowUppercase = true;
+const fonts = [1, 2, 3, 4];
+const table = generateTable(fonts, values, allowUppercase);
 
 export const initialState = {
   values,
-  allowUppercase: true,
-  fonts: [1, 2, 3, 4],
+  allowUppercase,
+  fonts,
   table,
 };
 
@@ -16,7 +31,7 @@ export const reducer = (state = initialState, action) => {
     case 'ADD_WORD':
       return {
         ...state,
-        values: [...state.values, action.word],
+        values: [...state.values, ...action.word.split(' ')],
       };
     case 'CLEAR_WORDS':
       return {
@@ -39,11 +54,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         allowUppercase: !state.allowUppercase
       };
-    // case 'GENERATE':
-    //   return {
-    //     ...state,
-    //     table: generateTable()
-    //   }
+    case 'GENERATE':
+      return {
+        ...state,
+        table: generateTable(state.fonts, state.values, state.allowUppercase)
+      };
     default:
       return state;
   }
