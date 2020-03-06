@@ -7,12 +7,7 @@ const table = [...Array(10)].map((_, i) => ([...Array(10)].map((_, i) => ({
 export const initialState = {
   values,
   allowUppercase: true,
-  fonts: {
-    one: true,
-    two: true,
-    three: true,
-    four: true,
-  },
+  fonts: [1, 2, 3, 4],
   table,
 };
 
@@ -31,10 +26,13 @@ export const reducer = (state = initialState, action) => {
     case 'CHANGE_FONTS':
       return {
         ...state,
-        fonts: {
-          ...state.fonts,
-          [action.font]: !state.fonts[action.font]
-        }
+        fonts: state.fonts.includes(action.font) ? (
+          // if it's already there, remove it
+          state.fonts.filter(font => font !== action.font)
+        ) : (
+          // if it's not there, add it
+          [...state.fonts, action.font]
+        )
       };
     case 'TOGGLE_UPPERCASE':
       return {

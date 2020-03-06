@@ -20,8 +20,8 @@ const Form = ({ state, dispatch }) => {
     setValue('');
   };
 
-  const handleFont = str => {
-    dispatch(CHANGE_FONTS(str));
+  const handleFont = num => {
+    dispatch(CHANGE_FONTS(num));
   };
 
   const handleUppercase = e => {
@@ -33,22 +33,14 @@ const Form = ({ state, dispatch }) => {
       <input type="text" value={value} onChange={handleChange} />
       {!!values.length && <p>{values.map(value => `${value} `)}</p>}
       <fieldset>
-        <label className="font-1">
-          <input type="checkbox" checked={fonts.one} onChange={() => handleFont('one')} />
-          Kalam
-        </label>
-        <label className="font-2">
-          <input type="checkbox" checked={fonts.two} onChange={() => handleFont('two')} />
-          Marck Script
-        </label>
-        <label className="font-3">
-          <input type="checkbox" checked={fonts.three} onChange={() => handleFont('three')} />
-          Source Sans Pro
-        </label>
-        <label className="font-4">
-          <input type="checkbox" checked={fonts.four} onChange={() => handleFont('four')} />
-          Playfair Display
-        </label>
+        {['Kalam', 'Marck Script', 'Source Sans Pro', 'Playfair Display'].map((font, index) => {
+          return (
+            <label key={index} className={`font-${index + 1}`}>
+              <input type="checkbox" checked={fonts.includes(index + 1)} onChange={() => handleFont(index + 1)} />
+              {font}
+            </label>
+          );
+        })}
       </fieldset>
       <fieldset>
         <label className="font-4">
