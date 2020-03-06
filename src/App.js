@@ -17,6 +17,7 @@ const App = () => {
     <div>
       <Form state={state} dispatch={dispatch} />
       <button onClick={handleGenerate} disabled={!state.values.length}>Generate</button>
+      <button onClick={() => global.print()}>Print</button>
       <Table table={state.table} fontSize={state.fontSize} />
     </div>
   );
