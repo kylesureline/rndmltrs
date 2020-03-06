@@ -19,3 +19,8 @@ export const TOGGLE_UPPERCASE = () => ({
 export const GENERATE = () => ({
   type: 'GENERATE',
 });
+
+export const SET_FONT_SIZE = fontSize => ({
+  type: 'SET_FONT_SIZE',
+  fontSize,
+});

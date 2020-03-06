@@ -4,11 +4,12 @@ import {
   CHANGE_FONTS,
   TOGGLE_UPPERCASE,
   CLEAR_WORDS,
+  SET_FONT_SIZE,
 } from '../reducers/actions';
 
 const Form = ({ state, dispatch }) => {
   const [value, setValue] = useState('');
-  const { values, fonts, allowUppercase } = state;
+  const { values, fonts, allowUppercase, fontSize } = state;
 
   const handleChange = e => {
     const { value } = e.target;
@@ -31,6 +32,11 @@ const Form = ({ state, dispatch }) => {
 
   const handleClear = e => {
     dispatch(CLEAR_WORDS());
+  };
+
+  const handleFontSize = e => {
+    const { value } = e.target;
+    dispatch(SET_FONT_SIZE(value));
   };
 
   return (
@@ -58,6 +64,9 @@ const Form = ({ state, dispatch }) => {
           <input type="checkbox" checked={allowUppercase} onChange={handleUppercase} />
           Allow uppercase
         </span>
+      </div>
+      <div>
+        <input type="range" value={fontSize} min={24} max={128} onChange={handleFontSize} />
       </div>
     </div>
   );

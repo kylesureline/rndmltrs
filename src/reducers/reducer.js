@@ -24,6 +24,7 @@ export const initialState = {
   allowUppercase,
   fonts,
   table,
+  fontSize: 32,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -58,6 +59,21 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         table: generateTable(state.fonts, state.values, state.allowUppercase)
+      };
+    case 'SET_FONT_SIZE':
+      return {
+        ...state,
+        fontSize: action.fontSize
+      };
+    case 'MAKE_FONT_SMALLER':
+      return {
+        ...state,
+        fontSize: state.fontSize - 1 >= 12 ? state.fontSize - 1 : state.fontSize
+      };
+    case 'MAKE_FONT_LARGER':
+      return {
+        ...state,
+        fontSize: state.fontSize + 1 <= 72 ? state.fontSize + 1 : state.fontSize
       };
     default:
       return state;

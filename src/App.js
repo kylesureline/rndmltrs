@@ -3,7 +3,6 @@ import { initialState, reducer } from './reducers/reducer';
 import Form from './components/Form';
 import Table from './components/Table';
 import {
-  CLEAR_WORDS,
   GENERATE,
 } from './reducers/actions';
 
@@ -18,7 +17,7 @@ const App = () => {
     <div>
       <Form state={state} dispatch={dispatch} />
       <button onClick={handleGenerate} disabled={!state.values.length}>Generate</button>
-      <Table table={state.table} />
+      <Table table={state.table} fontSize={state.fontSize} />
     </div>
   );
 };
