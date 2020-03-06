@@ -1,6 +1,6 @@
 const generateTable = (fonts, values, allowUppercase) => {
-  return [...Array(10)].map((_, rowIndex) => {
-    return [...Array(10)].map((_, colIndex) => {
+  return [...Array(6)].map((_, rowIndex) => {
+    return [...Array(6)].map((_, colIndex) => {
       let value = values[Math.floor(Math.random() * values.length)];
       if(allowUppercase) {
         value = Math.random() > .5 ? `${value.slice(0, 1).toUpperCase()}${value.slice(1)}` : value;
@@ -32,7 +32,7 @@ export const reducer = (state = initialState, action) => {
     case 'ADD_WORD':
       return {
         ...state,
-        values: [...state.values, ...action.word.split(' ')],
+        values: [...state.values, ...action.word.split(' ')].filter(word => word.replace(' ', '') !== ''),
       };
     case 'CLEAR_WORDS':
       return {
